@@ -166,7 +166,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <umam:SendMailConnections ArgumentAttachmentPaths="{x:Null}" AttachmentList="{x:Null}" AttachmentPaths="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" ConnectionAccountName="{x:Null}" ConnectionId="{x:Null}" ContinueOnError="{x:Null}" ReplyTo="{x:Null}" TextBody="{x:Null}" AttachmentInputMode="Existing" Attachments="[New List(Of IResource) From {LocalResource.FromPath(in_ScreenshotPath.toString)}]" AuthScopesInvalid="False" Body="[EmailOutput]" DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="334,546.6666666666666" sap2010:WorkflowViewState.IdRef="SendMailConnections_1" Importance="Normal" InputType="HTML" Mailbox="[in_SharedEmail]" SaveAsDraft="False" Subject="[&quot;[Notification] - &quot;+in_SCTASKNumber]" To="[{in_ReceiverEmail}]" UseConnectionService="False" UseSharedMailbox="True">
+            <umam:SendMailConnections ArgumentAttachmentPaths="{x:Null}" AttachmentList="{x:Null}" AttachmentPaths="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" ConnectionAccountName="{x:Null}" ConnectionId="{x:Null}" ContinueOnError="{x:Null}" MailboxBackup="{x:Reference __ReferenceID0}" ReplyTo="{x:Null}" TextBody="{x:Null}" AttachmentInputMode="Existing" Attachments="[New List(Of IResource) From {LocalResource.FromPath(in_ScreenshotPath.toString)}]" AuthScopesInvalid="False" Body="[EmailOutput]" DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="334,546.6666666666666" sap2010:WorkflowViewState.IdRef="SendMailConnections_1" Importance="Normal" InputType="HTML" Mailbox="[in_SharedEmail]" SaveAsDraft="False" Subject="[&quot;[Notification] - &quot;+in_SCTASKNumber]" To="[{in_ReceiverEmail}]" UseConnectionService="False" UseSharedMailbox="True">
               <umam:SendMailConnections.AttachmentsBackup>
                 <usau:BackupSlot x:TypeArguments="umame:AttachmentInputMode" StoredValue="Existing">
                   <usau:BackupSlot.BackupValues>
@@ -182,17 +182,18 @@
                 </usau:BackupSlot>
               </umam:SendMailConnections.InputTypeBackup>
               <umam:SendMailConnections.MailboxArg>
-                <umamm:MailboxArgument Backup="{x:Reference __ReferenceID0}" SharedMailbox="[in_SharedEmail]" UseSharedMailbox="True" />
+                <umamm:MailboxArgument SharedMailbox="[in_SharedEmail]" UseSharedMailbox="True">
+                  <umamm:MailboxArgument.Backup>
+                    <usau:BackupSlot x:TypeArguments="umame:MailboxSelectionMode" x:Name="__ReferenceID0" StoredValue="UseMailbox">
+                      <usau:BackupSlot.BackupValues>
+                        <scg:List x:TypeArguments="x:Object" x:Key="NoMailbox" Capacity="1">
+                          <x:Null />
+                        </scg:List>
+                      </usau:BackupSlot.BackupValues>
+                    </usau:BackupSlot>
+                  </umamm:MailboxArgument.Backup>
+                </umamm:MailboxArgument>
               </umam:SendMailConnections.MailboxArg>
-              <umam:SendMailConnections.MailboxBackup>
-                <usau:BackupSlot x:TypeArguments="umame:MailboxSelectionMode" x:Name="__ReferenceID0" StoredValue="UseMailbox">
-                  <usau:BackupSlot.BackupValues>
-                    <scg:List x:TypeArguments="x:Object" x:Key="NoMailbox" Capacity="1">
-                      <x:Null />
-                    </scg:List>
-                  </usau:BackupSlot.BackupValues>
-                </usau:BackupSlot>
-              </umam:SendMailConnections.MailboxBackup>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
