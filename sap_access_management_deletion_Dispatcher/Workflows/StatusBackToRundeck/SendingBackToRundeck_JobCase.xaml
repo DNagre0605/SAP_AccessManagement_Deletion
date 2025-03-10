@@ -10,7 +10,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>612,526</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>612,571.3333333333334</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SendingBackToRundeck_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -104,7 +104,7 @@
       <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SendingBackToRundeck" sap:VirtualizedContainerService.HintSize="450,461.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Sending a status back to Service Now and updating the ticket work notes and ticket status through rundeck in case of Active Jobs" DisplayName="SendingBackToRundeck" sap:VirtualizedContainerService.HintSize="450,506.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="PythonScript" />
       <Variable x:TypeArguments="x:Int32" Name="outHTTPStatus" />
@@ -112,10 +112,11 @@
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message-- Runceck for Job Status" sap:VirtualizedContainerService.HintSize="388,144.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Sending Back to Rundeck with Active Job Case--&quot;+in_UserID]" />
-    <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" Result="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" Body="[&quot;{&#xA;&quot;&quot;result&quot;&quot;: {&#xA;    &quot;&quot;rd_exec_id&quot;&quot;: &quot;&quot;&quot;+in_Rundecki_exec_id+&quot;&quot;&quot;,&#xA;    &quot;&quot;rd_job_status&quot;&quot;: &quot;&quot;DONE&quot;&quot;,&#xA;    &quot;&quot;ticket_state&quot;&quot;: &quot;&quot;Closed Complete&quot;&quot;,&#xA;    &quot;&quot;ticket_work_notes&quot;&quot;: &quot;&quot;Hello &quot;+in_Reqby+&quot;, User Account &quot;+in_UserID+&quot;   is associate with an active job. Please refer to the attached for details. SNOW Ticket Number:&quot;+in_TicketNumber+&quot;   User Maintenance:Delete Account&quot;+&quot;SAP User ID: &quot;+in_UserID+ &quot;   Kindly resolve it the active job before raising a new ticket again.&quot;&quot;&#xA;&#x9;}&#xA; }&quot;]" BodyFormat="application/xml" DisplayName="Http client_Changed" EnableSSLVerification="True" EndPoint="[in_WebhookURL]" sap:VirtualizedContainerService.HintSize="388,72" sap2010:WorkflowViewState.IdRef="HttpClient_3" Method="POST" StatusCode="[outHTTPStatus]" TimeoutMS="6000">
+    <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" Result="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" Body="[&quot;{&#xA;&quot;&quot;result&quot;&quot;: {&#xA;    &quot;&quot;rd_exec_id&quot;&quot;: &quot;&quot;&quot;+in_Rundecki_exec_id+&quot;&quot;&quot;,&#xA;    &quot;&quot;rd_job_status&quot;&quot;: &quot;&quot;DONE&quot;&quot;,&#xA;    &quot;&quot;ticket_state&quot;&quot;: &quot;&quot;Closed Complete&quot;&quot;,&#xA;    &quot;&quot;ticket_work_notes&quot;&quot;: &quot;&quot;Hello &quot;+in_Reqby+&quot;, User Account &quot;+in_UserID+&quot;   is associate with an active job. Please refer to the attached for details. SNOW Ticket Number:&quot;+in_TicketNumber+&quot;   User Maintenance:Delete Account&quot;+&quot;SAP User ID: &quot;+in_UserID+ &quot;   Kindly resolve it the active job before raising a new ticket again.&quot;&quot;&#xA;&#x9;}&#xA; }&quot;]" BodyFormat="application/xml" DisplayName="Http client_active Jobs" EnableSSLVerification="True" EndPoint="[in_WebhookURL]" sap:VirtualizedContainerService.HintSize="388,72" sap2010:WorkflowViewState.IdRef="HttpClient_3" Method="POST" StatusCode="[outHTTPStatus]" TimeoutMS="6000">
       <ui:HttpClient.Attachments>
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.Attachments>

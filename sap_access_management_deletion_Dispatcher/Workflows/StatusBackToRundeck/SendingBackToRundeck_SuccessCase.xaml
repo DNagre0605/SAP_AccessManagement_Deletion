@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>612,616.6666666666666</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>612,662</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SendingBackToRundeck_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -103,7 +103,7 @@
       <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SendingBackToRundeck" sap:VirtualizedContainerService.HintSize="450,552" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Sending a status back to Service Now and updating the ticket work notes and ticket status through rundeck in case of Successful deletion of SAP user" DisplayName="SendingBackToRundeck" sap:VirtualizedContainerService.HintSize="450,597.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="PythonScript" />
       <Variable x:TypeArguments="x:Int32" Name="outHTTPStatus" />
@@ -111,10 +111,11 @@
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,144.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Sending back to Rundeck _Successs for user--&quot;+in_UserID]" />
-    <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" Result="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" Body="[&quot;{&#xA;&quot;&quot;result&quot;&quot;: {&#xA;    &quot;&quot;rd_exec_id&quot;&quot;: &quot;+in_Rundecki_exec_id+&quot;,&#xA;    &quot;&quot;rd_job_status&quot;&quot;: &quot;&quot;DONE&quot;&quot;,&#xA;    &quot;&quot;ticket_state&quot;&quot;: &quot;&quot;Closed Complete&quot;&quot;,&#xA;    &quot;&quot;ticket_work_notes&quot;&quot;: &quot;&quot;Hello &quot;+in_Reqby+&quot; Good day! Please be informed that IT team completed the deletion of SAP Account &quot;+in_UserID+ &quot;. For any clarification, please don’t hesitate to contact us – AMStrong.Authorization AMStrong.Authorization@accenture.com Regards, IT Support Team&quot;&quot;&#xA;&#x9;}&#xA; }&quot;]" BodyFormat="application/xml" DisplayName="Http client" EnableSSLVerification="True" EndPoint="[in_WebhookURL]" sap:VirtualizedContainerService.HintSize="388,72" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" StatusCode="[outHTTPStatus]" TimeoutMS="6000">
+    <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" Result="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" Body="[&quot;{&#xA;&quot;&quot;result&quot;&quot;: {&#xA;    &quot;&quot;rd_exec_id&quot;&quot;: &quot;+in_Rundecki_exec_id+&quot;,&#xA;    &quot;&quot;rd_job_status&quot;&quot;: &quot;&quot;DONE&quot;&quot;,&#xA;    &quot;&quot;ticket_state&quot;&quot;: &quot;&quot;Closed Complete&quot;&quot;,&#xA;    &quot;&quot;ticket_work_notes&quot;&quot;: &quot;&quot;Hello &quot;+in_Reqby+&quot; Good day! Please be informed that IT team completed the deletion of SAP Account &quot;+in_UserID+ &quot;. For any clarification, please don’t hesitate to contact us – AMStrong.Authorization AMStrong.Authorization@accenture.com Regards, IT Support Team&quot;&quot;&#xA;&#x9;}&#xA; }&quot;]" BodyFormat="application/xml" DisplayName="Http client -- SAP User Deletion" EnableSSLVerification="True" EndPoint="[in_WebhookURL]" sap:VirtualizedContainerService.HintSize="388,72" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" StatusCode="[outHTTPStatus]" TimeoutMS="6000">
       <ui:HttpClient.Attachments>
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.Attachments>

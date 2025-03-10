@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>968,7008.666666666667</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>968,6604.666666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>BeforeDeleteCheckJobStatus_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -144,7 +144,7 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="BeforeDeleteCheckJobStatus" sap:VirtualizedContainerService.HintSize="978,6944" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This workflow is used to get any active jobs are prensent or not for the perticular user&#xD;&#xA;" DisplayName="BeforeDeleteCheckJobStatus" sap:VirtualizedContainerService.HintSize="978,6540" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="StatuscheckDT" />
       <Variable x:TypeArguments="x:String" Name="FromDate" />
@@ -157,9 +157,10 @@
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="916,85.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_7">
+    <Assign DisplayName="Assign== Deletion date" sap:VirtualizedContainerService.HintSize="916,85.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_7">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[In_DeletionDate]</OutArgument>
       </Assign.To>
@@ -167,13 +168,13 @@
         <InArgument x:TypeArguments="x:String">[In_DeletionDate.Replace("-",".")]</InArgument>
       </Assign.Value>
     </Assign>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: SAP Easy Access  -  User Menu" sap:VirtualizedContainerService.HintSize="916,6708" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="6bce986f-06c3-4d69-946a-6b5cf44ccc41" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: SAP Easy Access  -  User Menu" sap:VirtualizedContainerService.HintSize="916,6258.666666666667" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="6bce986f-06c3-4d69-946a-6b5cf44ccc41" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="882,6410.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="882,5961.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -195,7 +196,13 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:UiElementExists>
-            <If Condition="[SAPHomePageExists]" sap:VirtualizedContainerService.HintSize="820,503.3333333333333" sap2010:WorkflowViewState.IdRef="If_6">
+            <If Condition="[SAPHomePageExists]" DisplayName="If-- SAP home page" sap:VirtualizedContainerService.HintSize="820,54" sap2010:WorkflowViewState.IdRef="If_6">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
               <If.Then>
                 <Sequence sap:VirtualizedContainerService.HintSize="300,81.33333333333333" sap2010:WorkflowViewState.IdRef="Sequence_15">
                   <sap:WorkflowViewStateService.ViewState>
