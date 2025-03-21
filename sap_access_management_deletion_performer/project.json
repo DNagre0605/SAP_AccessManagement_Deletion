@@ -13,7 +13,7 @@
   "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "23.10.7.0",
-  "projectVersion": "1.0.2",
+  "projectVersion": "1.0.7",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
@@ -103,5 +103,6 @@
   "publishData": {
     "iconUrl": ".package/502_danone.jpg"
   },
-  "targetFramework": "Windows"
+  "targetFramework": "Windows",
+  "automationHubIdeaUrl": "https://cloud.uipath.com/danonsnyskyf/PRODUCTION/automationhub_/automation-profile/uipath-amstrong---sap-access-deletion"
 }
