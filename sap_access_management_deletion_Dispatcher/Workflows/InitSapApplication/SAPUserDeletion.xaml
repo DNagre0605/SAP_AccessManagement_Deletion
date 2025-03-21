@@ -1,0 +1,271 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="SAPUserDeletion" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Checking if BOT should continue to delete or not" Name="in_boolContinueDelete" Type="InArgument(x:Boolean)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="Getting User ID of the User" Name="in_strUserID" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Getting Rundeck ID of the User" Name="in_strRundeckId" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Getting email of the Requested by" Name="in_strEmail" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Getting RITM Number " Name="in_strRITMNumber" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Getting Orchestrator folder path" Name="in_strOrchestratorFolderPath" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Getting SCTASK number of the ticket raised" Name="in_strSctaskNumber" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Input dataTable which is getting updated for the user" Name="in_dt_DeleteUserList" Type="InArgument(sd:DataTable)" />
+    <x:Property sap2010:Annotation.AnnotationText="Getting User Status" Name="in_strUserStatus" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Getting the row number of the user from the input excel data table" Name="in_strCurrentRow" Type="InArgument(sd:DataRow)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>720,3258</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>SAPUserDeletion_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Services.RuntimeAnalyze</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+      <x:String>UiPath.Core.Activities.SAP</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="This workflow is used to decide weather user to be deleted if there are no active Jobs associated with the user and If there are jobs associated then BOT will not delete the SAP Account of the user" DisplayName="SAPUserDeletion" sap:VirtualizedContainerService.HintSize="730,3193.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message-- SAP user deletion" sap:VirtualizedContainerService.HintSize="668,144.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;SAP User Deletion workflow&quot;]" />
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: SAP Easy Access  -  User Menu" sap:VirtualizedContainerService.HintSize="668,2852.6666666666665" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="6bce986f-06c3-4d69-946a-6b5cf44ccc41" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Checking deletion Sequence" sap:VirtualizedContainerService.HintSize="634,2555.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_11">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If Condition="[in_boolContinueDelete=True]" DisplayName="If--strContinueToDelete=&quot;Yes&quot;" sap:VirtualizedContainerService.HintSize="572,2439.3333333333335" sap2010:WorkflowViewState.IdRef="If_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="376,1072.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message-- Account deletion" sap:VirtualizedContainerService.HintSize="334,147.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;BOT is going for SAP Account deletion&quot;]" />
+                  <uix:NSAPCallTransaction DisplayName="Call Transaction --SU01" sap:VirtualizedContainerService.HintSize="334,150.66666666666666" sap2010:WorkflowViewState.IdRef="NSAPCallTransaction_1" Prefix="/n" Transaction="[in_Config(&quot;SAP_AccessDeleteTCode&quot;).ToString]" Version="V4" />
+                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into User ID" EmptyFieldMode="MultiLine" sap:VirtualizedContainerService.HintSize="334,222.66666666666666" sap2010:WorkflowViewState.IdRef="NTypeInto_4" ScopeIdentifier="6bce986f-06c3-4d69-946a-6b5cf44ccc41" Text="[in_strUserID]" Version="V1">
+                    <uix:NTypeInto.Target>
+                      <uix:TargetAnchorable DesignTimeRectangle="139, 197, 149, 23" ElementType="InputBox" FullSelectorArgument="&lt;sap id='usr/ctxtSUID_ST_BNAME-BNAME' /&gt;" FuzzySelectorArgument="&lt;sap id='usr/ctxtSUID_ST_BNAME-BNAME' /&gt;" Guid="0ebd7689-0cec-42ae-8adf-f09637ada3a6" InformativeScreenshot="cceab473dd561edfa2f49b49510ef0ca.png" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='User Maintenance: Initial Screen' /&gt;" SearchSteps="Selector" Visibility="Interactive" WaitForReadyArgument="Complete" />
+                    </uix:NTypeInto.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NTypeInto>
+                  <uix:NClick ActivateBefore="True" ClickType="Single" CursorMotionType="Instant" DisplayName="Click 'Button Delete (Shift+F2)'" sap:VirtualizedContainerService.HintSize="334,159.33333333333334" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6bce986f-06c3-4d69-946a-6b5cf44ccc41" Version="V1">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable DesignTimeRectangle="136, 178, 28, 34" ElementType="Button" FullSelectorArgument="&lt;sap tooltip='Delete   (Shift+F2)' type='GuiButton' /&gt;" FuzzySelectorArgument="&lt;sap id='tbar[1]/btn[14]' /&gt;" Guid="95706f5e-d063-4b7f-93f7-7c86c33464e4" InformativeScreenshot="2f00ebc14f6cd367330d4f8aae12c186.png" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='User Maintenance: Initial Screen' /&gt;" SearchSteps="Selector" Visibility="Interactive" WaitForReadyArgument="Complete" />
+                    </uix:NClick.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NClick>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="CheckingForUserExists - Invoke Workflow File (Workflows\InitSapApplication\CheckingForUserExists.xaml)" sap:VirtualizedContainerService.HintSize="334,145.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Workflows\InitSapApplication\CheckingForUserExists.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strUserStatus">[in_strUserStatus]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strSctaskNumber">[in_strSctaskNumber]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strUserId">[in_strUserID]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strRundeckId">[in_strRundeckId]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strEmail">[in_strEmail]</InArgument>
+                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_DeleteUserList">[in_dt_DeleteUserList]</InOutArgument>
+                      <InArgument x:TypeArguments="sd:DataRow" x:Key="in_strCurrentRow">[in_strCurrentRow]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="538,1182.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="strScreenShotPath" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="log Message-- Assigned Jobs" sap:VirtualizedContainerService.HintSize="496,147.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;User is having assigned to some existing jobs running so we are not removing the user&quot;]" />
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\TakeScreenshot.xaml - Invoke Workflow File screenshot" sap:VirtualizedContainerService.HintSize="496,145.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Framework\TakeScreenshot.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[in_Config("SAP_AccessDelete_FolderErrorScreenshot").ToString]</InArgument>
+                      <InOutArgument x:TypeArguments="x:String" x:Key="io_FilePath">[strScreenShotPath]</InOutArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SendingBackToRundeck_JobCase.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="496,145.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Workflows\StatusBackToRundeck\SendingBackToRundeck_JobCase.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strRundeckid">[in_strRundeckId]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strReqby">[in_strEmail]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strUserID">[in_strUserID]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strTicketNumber">[in_strRITMNumber]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strWebhookURL">[in_Config("SAP_AccessManagement_Deletion_webhookURL").ToString]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Email_JobHandling.xaml - Invoke Workflow File Active job" sap:VirtualizedContainerService.HintSize="496,145.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Workflows\EmailConfigurations\Email_JobHandling.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strOrchestratorFolderPath">[in_strOrchestratorFolderPath]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strApplicationID">[in_Config("Outlook_ApplicationID").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strSharedEmail">[in_Config("SharedOutlookEmail").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strReceiverEmail">[in_Config("SAP_AccessManagement_SupportTeamEmail").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strUserID">[in_strUserID]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strScreenshotPath">[strScreenShotPath]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strTenantID">[in_Config("Outlook_TenantID").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_strRITMNumber">[in_strRITMNumber]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <Sequence DisplayName="Sequence-- Adding Data to excel" sap:VirtualizedContainerService.HintSize="496,352" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign DisplayName="Assign -- Writing Status" sap:VirtualizedContainerService.HintSize="434,85.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_2">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[in_strCurrentRow.Item("Status")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">["User is having Active Jobs"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[in_dt_DeleteUserList]" DisplayName="Write Range Workbook-- Write Job Assigned" sap:VirtualizedContainerService.HintSize="434,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Delete Account" WorkbookPath="[in_Config(&quot;SAP_AccessModificationsInputFile&quot;).ToString]" />
+                  </Sequence>
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-11, -11, 1942, 1042" FilePath="[in_Config(&quot;SapExecutionPath&quot;).ToString]" IconBase64="iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAALgSURBVGhD7ZbdS1NhHMfXXf9CQc+CuugNgvIq1vtl4IUQUdfdFKZ4ISQE3fRi05oYXRS9rewFyQuFhCBsc9pE55Zz29lkieJShNjUPMZi27fndzzbOjmneTyjwfOB7/Xz/X7P8/zOzyQQCAQCgUCgAwDbucxlqB1cW02xeNL5QUpIXYF4qBz0PhgPRWd/RlLpjJ0H2Gb6GEpMVjzwg93zloWqXoYxMrXom5dT+5UrVC4Bdtq8OPcqgtFvci+ZTyymtpRVgDPPJPhj8hdu/pBiPMv/HsDMdeHNGKSZpX7e+i7Vdp7CAYbB7pZIdJbm7Lzo2vDmM8FpeWBhKVWhWtbyd4ADLR4cs/XjaLMDlqZPhorO2NvogNk6oDGe1fnXY+B33sOb363aXYkmAG+ktkNCdGYeE7PGanxmDt3uMPbVt4HdcPDz81+Cmq+0SwhMyy7e/GHVamG0ATxo6JSQ/JXiI9ZYBv1RnK5rBat/C9bYnzNPOtsWwUhs0Tcnp/aoNlen1AHS6TQ8o1FYrtjA6uxgt/vUt7DcPJnn08bJp83B3KgsRqkD+ILjOFXTxM2/ALvlzJkn0bWh5sm8am9tShUgnc7A7YvgyKU7YLVPefMuTfP0YOnO07VZV/NZShEgk8nAH57AiWorWPUj/mh7cuZpztOopGmz5oMthNEByPxnrwTLZd58zROYb/KJ88e1oZ8Uzfmio7IYRgaga0PNK+Z582aleY9ylvqTUv6wq/6k1oM2wDAqHw+hpduD+119aO106VJTew+O06jkd37ZfL55Wsxotym4HvwLmgAkqxvsejdYQwfY1Xf6da0LZuXB5punlVjdKrWL2UZYEYBEhzWThvRLMZ5vfsU+r5eCAQwQNV9wn9dLqQKsus/rxegAa+7zejEygDoqi+/zenGNzU9WPZdw8mFg03WxPUp3vvg+r5ep70n74Ncfve7owqYrMCW3b2g9EAgEAoFAIBCsA5PpNwS2sCms0G/9AAAAAElFTkSuQmCC" InformativeScreenshot="ff7831a4aedbfebbeaf6c4d29a325be9.png" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='*' /&gt;" Title="*" />
+      </uix:NApplicationCard.TargetApp>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>
